@@ -2,6 +2,7 @@ package org.grails.cxf.artefact
 
 import grails.core.GrailsApplication
 import grails.util.GrailsClassUtils
+import grails.util.Holders
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.apache.cxf.bus.spring.SpringBus
@@ -42,7 +43,6 @@ class EndpointBeanConfiguration {
     Closure endpointBeans() {
         return {
             eachEndpointArtefact {DefaultGrailsEndpointClass endpointArtefact ->
-                println "Wiring up $endpointArtefact"
                 if(endpointArtefact) {
                     String endpointName = endpointArtefact?.propertyName
                     Class endpointClass = endpointArtefact?.clazz

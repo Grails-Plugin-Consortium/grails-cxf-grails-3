@@ -13,7 +13,7 @@ appender('STDOUT', ConsoleAppender) {
 }
 
 root(ERROR, ['STDOUT'])
-logger("org.grails.cxf", DEBUG, ["CONSOLE"])
+logger("org.grails.cxf", TRACE, ["CONSOLE"])
 
 if(Environment.current == Environment.DEVELOPMENT) {
     def targetDir = BuildSettings.TARGET_DIR

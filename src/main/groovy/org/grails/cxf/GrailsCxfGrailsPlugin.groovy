@@ -57,8 +57,8 @@ class GrailsCxfGrailsPlugin extends Plugin {
             EndpointBeanConfiguration bc = new EndpointBeanConfiguration(grailsApplication)
 
             with bc.cxfBeans()
-            with bc.factoryBeans()
             with bc.endpointBeans()
+            with bc.factoryBeans()
 
 
             cxfServlet(ServletRegistrationBean, new GrailsCxfServlet(), "/services/*") {
