@@ -49,7 +49,10 @@ class GrailsCxfGrailsPlugin extends Plugin {
 
     Closure doWithSpring() {
         {  ->
-
+//            cxfServlet(ServletRegistrationBean, new GrailsCxfServlet(), "/services/*") {
+            CxfServlet(ServletRegistrationBean, new GrailsCxfServlet(), "/services/*") {
+                loadOnStartup = 10
+            }
 //            customLoggingInInterceptor(CustomLoggingInInterceptor) {
 //                name = "customLoggingInInterceptor"
 //            }
@@ -61,9 +64,7 @@ class GrailsCxfGrailsPlugin extends Plugin {
             with bc.factoryBeans()
 
 
-            cxfServlet(ServletRegistrationBean, new GrailsCxfServlet(), "/services/*") {
-                loadOnStartup = 2
-            }
+
         }
     }
 
