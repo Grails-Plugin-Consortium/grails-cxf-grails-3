@@ -22,7 +22,7 @@ class GrailsCxfServlet extends CXFServlet {
     void init(final ServletConfig servletConfig) {
         super.init(servletConfig)
         assertBusConfigured()
-        loadAdditionalConfig()
+//        loadAdditionalConfig()
     }
 
     private void assertBusConfigured() {

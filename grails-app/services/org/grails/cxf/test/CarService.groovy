@@ -3,7 +3,7 @@ package org.grails.cxf.test
 import org.grails.cxf.utils.EndpointType
 
 //this SHOULD get wired up as a service as it has the expose static property
-class CarService {
+class CarService implements ICarService {
 
     static expose = [EndpointType.SIMPLE]
     static excludes = ['dontHonk']
@@ -23,4 +23,9 @@ class CarService {
     String start(){
         'GAS'
     }
+}
+
+interface ICarService {
+     String honkHorn()
+     String dontHonk()
 }

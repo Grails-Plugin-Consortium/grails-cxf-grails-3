@@ -32,7 +32,12 @@ public interface GrailsEndpointClass {
                             "getMetaMethods",
                             "setMetaMethods",
                             "getErrors",
-                            "setErrors"
+                            "setErrors",
+                            "MetaClass",
+                            "metaClass",
+                            "groovy.lang.MetaClass",
+                            "groovy.lang.GroovyObjectSupport.getMetaClass()"
+
                     )));
 
     /**
