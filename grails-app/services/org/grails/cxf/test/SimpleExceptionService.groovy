@@ -8,7 +8,7 @@ import org.grails.cxf.utils.EndpointType
 
 class SimpleExceptionService {
 
-    static expose = EndpointType.JAX_WS
+//    static expose = EndpointType.JAX_WS
 
     @WebMethod
     Boolean pass(){

@@ -1,31 +1,10 @@
 package org.grails.cxf
 
-import grails.plugins.*
-import grails.util.GrailsNameUtils
+import grails.plugins.Plugin
 import org.apache.cxf.bus.spring.SpringBus
-import org.apache.cxf.frontend.ServerFactoryBean
 import org.grails.cxf.artefact.EndpointBeanConfiguration
-import org.grails.cxf.artefact.EndpointExposureType
-import org.grails.cxf.artefact.GrailsEndpointClass
-import org.grails.cxf.frontend.DelegatingServerFactoryBean
-import org.grails.cxf.frontend.GrailsJaxWsServerFactoryBean
-import org.grails.cxf.frontend.GrailsSimpleServerFactoryBean
 import org.grails.cxf.servlet.GrailsCxfServlet
-import org.grails.cxf.test.BookStoreEndpoint
-import org.grails.cxf.test.BookStoreService
-import org.grails.cxf.test.CarService
-import org.grails.cxf.test.CoffeeMakerEndpoint
-import org.grails.cxf.test.HelloWorld
-import org.grails.cxf.test.HelloWorldImpl
-import org.grails.cxf.test.ICarService
-import org.grails.cxf.test.PlaneService
-import org.grails.cxf.test.soap.HelloGroovy
-import org.grails.cxf.test.soap.HelloGroovyImpl
-import org.grails.cxf.test.soap.interceptor.CustomLoggingInInterceptor
-import org.grails.cxf.utils.GrailsCxfUtils
 import org.springframework.boot.context.embedded.ServletRegistrationBean
-
-import javax.xml.ws.soap.SOAPBinding
 
 class GrailsCxfGrailsPlugin extends Plugin {
 
@@ -68,38 +47,30 @@ class GrailsCxfGrailsPlugin extends Plugin {
     ]
 
     Closure doWithSpring() {
-        {  ->
+        { ->
             cxf(SpringBus)
 
             cxfServlet(ServletRegistrationBean, new GrailsCxfServlet(), "/services/*") {
                 loadOnStartup = 10
             }
 
-            "carServiceFactory"(GrailsSimpleServerFactoryBean) {
-                address = '/car'
-                serviceClass = ICarService
-                serviceBean = ref('carService')
-                ignoredMethods = GrailsEndpointClass.DEFAULT_GROOVY_EXCLUDES
-                bus = ref(cxf)
-            }
+//            "carServiceFactory"(GrailsJaxWsServerFactoryBean) {
+//                address = '/car'
+//                serviceClass = CarService
+//                serviceBean = ref('carService')
+//                ignoredMethods = GrailsEndpointClass.DEFAULT_GROOVY_EXCLUDES
+//                bus = ref(cxf)
+//            }
+//
+//            "carServiceBean"(('carServiceFactory'): 'create')
 
-            "carServiceBean"(('carServiceFactory'): 'create')
-
-
-
-//            EndpointBeanConfiguration bc = new EndpointBeanConfiguration(grailsApplication)
+            EndpointBeanConfiguration bc = new EndpointBeanConfiguration(grailsApplication)
 //
 //            with bc.cxfBeans()
-//            with bc.endpointBeans()
-//            with bc.factoryBeans()
-
-
-
+            with bc.endpointBeans()
+            with bc.factoryBeans()
         }
     }
-
-
-
 
     void doWithDynamicMethods() {
         // TODO Implement registering dynamic methods to classes (optional)

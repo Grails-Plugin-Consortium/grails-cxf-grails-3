@@ -1,25 +1,31 @@
 package org.grails.cxf.test
 
-import javax.jws.WebService
+import org.grails.cxf.utils.GrailsCxfEndpoint
+
 import javax.jws.WebMethod
-import javax.jws.WebResult
+import javax.jws.WebService
 
-@WebService
-class PlaneService {
+@GrailsCxfEndpoint(soap12 = true)
+class PlaneService implements IPlaneService {
 
-    //todo: This will not work unless expose is defined as the default is to not ignore anything... not sure why
-    static excludes = ['ignoreMe']
-    static soap12 = true
-
-    @WebMethod Boolean canFly(){
+    Boolean canFly() {
         true
     }
 
-    @WebMethod Boolean canFloat(){
+    Boolean canFloat() {
         false
     }
 
-    String ignoreMe(Boolean bool){
+    String ignoreMe(Boolean bool) {
         bool.toString()
     }
+}
+
+@WebService
+interface IPlaneService {
+    @WebMethod
+    Boolean canFly()
+
+    @WebMethod
+    Boolean canFloat()
 }

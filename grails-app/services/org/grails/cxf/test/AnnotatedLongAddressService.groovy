@@ -7,7 +7,7 @@ import javax.jws.WebParam
 
 /**
  */
-@GrailsCxfEndpoint(address = "/i/love/turtles/v1/zombie")
+//@GrailsCxfEndpoint(address = "/i/love/turtles/v1/zombie")
 class AnnotatedLongAddressService {
 
     @WebMethod(operationName="simpleMethod")

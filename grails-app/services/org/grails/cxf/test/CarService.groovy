@@ -1,31 +1,35 @@
 package org.grails.cxf.test
 
-import org.grails.cxf.utils.EndpointType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
-//this SHOULD get wired up as a service as it has the expose static property
+import javax.jws.WebMethod
+import javax.jws.WebResult
+import javax.jws.WebService
+
+@GrailsCxfEndpoint
 class CarService implements ICarService {
-
-    static expose = [EndpointType.SIMPLE]
-    static excludes = ['dontHonk']
 
     String honkHorn() {
         'HONK'
     }
 
-    String dontHonk(){
+    String dontHonk() {
         'BEEP'
     }
 
-    String stop(){
+    String stop() {
         'BRAKES'
     }
 
-    String start(){
+    String start() {
         'GAS'
     }
 }
 
+@WebService
 interface ICarService {
-     String honkHorn()
-     String dontHonk()
+
+    @WebMethod
+    @WebResult(name = 'honk')
+    String honkHorn()
 }

@@ -5,18 +5,14 @@ import org.grails.cxf.utils.EndpointType
 import javax.jws.WebMethod
 import javax.jws.WebResult
 
-class PageService {
+class PageService implements IPageService {
 
     static expose = [EndpointType.JAX_WS]
 
-    @WebResult(name = 'hello')
-    @WebMethod(operationName = 'sayHello')
     String sayHello() {
         'hello'
     }
 
-    @WebResult(name = 'chapters')
-    @WebMethod(operationName = 'getSomeChapters')
     List<Chapter> getSomeChapters() {
         List<Chapter> chapters = []
         chapters << createChapter([name: "Chapter1"], false, false)
@@ -25,14 +21,10 @@ class PageService {
         chapters
     }
 
-    @WebResult(name = 'words')
-    @WebMethod(operationName = 'getSomeWords')
     List<Word> getSomeWords() {
         createWords()
     }
 
-    @WebResult(name = 'page')
-    @WebMethod(operationName = 'getMeSomePersistedPagesWithWords')
     List<Page> getMeSomePersistedPagesWithWords() {
         List<Page> pages = []
         pages << createPage([name: "saved page 1", number: 1], true).save(flush: true)
@@ -41,8 +33,6 @@ class PageService {
         pages
     }
 
-    @WebResult(name = 'page')
-    @WebMethod(operationName = 'getMeSomePagesWithWords')
     List<Page> getMeSomePagesWithWords() {
         List<Page> pages = []
         pages << createPage([name: "test1", number: 2], true)
@@ -51,8 +41,6 @@ class PageService {
         pages
     }
 
-    @WebResult(name = 'page')
-    @WebMethod(operationName = 'getMeSomePages')
     List<Page> getMeSomePages() {
         List<Page> pages = []
         pages << createPage([name: "Page 1, version should increment", number: 2], false)
@@ -92,4 +80,30 @@ class PageService {
             words.each { page.addToWords(it) }
         words
     }
+}
+
+interface IPageService {
+    @WebResult(name = 'hello')
+    @WebMethod(operationName = 'sayHello')
+    String sayHello()
+
+    @WebResult(name = 'chapters')
+    @WebMethod(operationName = 'getSomeChapters')
+    List<Chapter> getSomeChapters()
+
+    @WebResult(name = 'words')
+    @WebMethod(operationName = 'getSomeWords')
+    List<Word> getSomeWords()
+
+    @WebResult(name = 'page')
+    @WebMethod(operationName = 'getMeSomePersistedPagesWithWords')
+    List<Page> getMeSomePersistedPagesWithWords()
+
+    @WebResult(name = 'page')
+    @WebMethod(operationName = 'getMeSomePagesWithWords')
+    List<Page> getMeSomePagesWithWords()
+
+    @WebResult(name = 'page')
+    @WebMethod(operationName = 'getMeSomePages')
+    List<Page> getMeSomePages()
 }

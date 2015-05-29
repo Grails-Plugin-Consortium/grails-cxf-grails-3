@@ -69,6 +69,7 @@ dependencies {
 
     compile('commons-cli:commons-cli:1.2')
 
+    compile('org.apache.commons:commons-lang3:3.4')
     compile("org.apache.cxf:cxf-core:${cxfVersion}")
     compile("org.apache.cxf:cxf-tools-wsdlto-core:${cxfVersion}")
     compile("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:${cxfVersion}")

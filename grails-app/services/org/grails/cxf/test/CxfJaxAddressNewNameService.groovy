@@ -8,7 +8,7 @@ import javax.jws.WebResult
 
 class CxfJaxAddressNewNameService {
 
-    static expose = EndpointType.JAX_WS
+//    static expose = EndpointType.JAX_WS
     static address = "/override/v1/ninjas"
 
     @WebResult(name='legacyResult')

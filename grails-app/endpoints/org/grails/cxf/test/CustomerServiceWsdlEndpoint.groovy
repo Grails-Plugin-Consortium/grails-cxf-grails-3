@@ -1,15 +1,13 @@
 package org.grails.cxf.test
 
 import org.grails.cxf.test.soap.Customer
-
-import javax.jws.WebService
 import org.grails.cxf.utils.EndpointType
 
-@WebService(name = 'CustomerServiceWsdlEndpoint',
-targetNamespace = 'http://test.cxf.grails.org/',
-serviceName = 'CustomerServiceWsdlEndpoint',
-portName = 'CustomerServiceWsdlPort')
-class CustomerServiceWsdlEndpoint {
+import javax.jws.WebMethod
+import javax.jws.WebService
+
+
+class CustomerServiceWsdlEndpoint implements ICustomerServiceWsdlEndpoint {
 
     static expose = EndpointType.JAX_WS_WSDL
     static wsdl = 'org/grails/cxf/test/soap/CustomerService.wsdl'
@@ -19,4 +17,13 @@ class CustomerServiceWsdlEndpoint {
     List<Customer> getCustomersByName(final String name) {
         customerServiceEndpoint.getCustomersByName(name)
     }
+}
+
+@WebService(name = 'CustomerServiceWsdlEndpoint',
+        targetNamespace = 'http://test.cxf.grails.org/',
+        serviceName = 'CustomerServiceWsdlEndpoint',
+        portName = 'CustomerServiceWsdlPort')
+interface ICustomerServiceWsdlEndpoint {
+    @WebMethod
+    List<Customer> getCustomersByName(String name)
 }

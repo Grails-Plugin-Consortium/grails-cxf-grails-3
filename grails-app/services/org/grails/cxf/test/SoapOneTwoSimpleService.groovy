@@ -4,7 +4,7 @@ import org.grails.cxf.utils.EndpointType
 
 class SoapOneTwoSimpleService {
 
-    static expose = [EndpointType.SIMPLE]
+//    static expose = [EndpointType.SIMPLE]
     static soap12 = true
 
     String simpleMethod(String param) {

@@ -12,7 +12,7 @@ import javax.jws.WebResult
  */
 //this works
 //@GrailsCxfEndpoint(inInterceptors = ["customLoggingInInterceptor"])
-@GrailsCxfEndpoint()
+//@GrailsCxfEndpoint()
 //these seem to fail injection of any internal beans
 //@InInterceptors(classes = [CustomLoggingInInterceptor])
 //@InInterceptors(interceptors=['CustomLoggingInInterceptor'])

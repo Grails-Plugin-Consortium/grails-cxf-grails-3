@@ -78,6 +78,7 @@ class EndpointBeanConfiguration {
                 Map annotatedProperties = endpointArtefact.properties ?: [:]
 
                 "${endpointName}Factory"(endpointFactoryClass) {
+                    bus = ref('cxf')
                     address = endpointAddress
                     serviceClass = endpointClass
                     serviceBean = ref(endpointName)
@@ -110,6 +111,9 @@ class EndpointBeanConfiguration {
                     }
 
                 }
+
+                "${endpointName}Bean"(("${endpointName}Factory"): 'create')
+                log.debug "Cxf endpoint bean wired for [${endpointName}] on [${endpointName}Bean] servlet."
 
                 log.debug "Cxf endpoint server factory wired for [${endpointArtefact.fullName}] of type [${endpointFactoryClass.simpleName}]."
                 log.trace 'Cxf endpoint server factory bean wiring details:' +
@@ -143,6 +147,7 @@ class EndpointBeanConfiguration {
                 Map annotatedProperties = endpointArtefact.properties ?: [:]
 
                 "${endpointName}Factory"(endpointFactoryClass) {
+                    bus = ref('cxf')
                     address = endpointAddress
                     serviceClass = endpointClass
                     serviceBean = ref(endpointName)
@@ -175,6 +180,9 @@ class EndpointBeanConfiguration {
 
                 }
 
+                "${endpointName}Bean"(("${endpointName}Factory"): 'create')
+                log.debug "Cxf endpoint bean wired for [${endpointName}] on [${endpointName}Bean] servlet."
+
 //                ((ServerFactoryBean)grailsApplication.getMainContext().getBean("${endpointName}Factory")).getInInterceptors().add()
 
                 log.debug "Cxf endpoint server factory wired for [${endpointArtefact.fullName}] of type [${endpointFactoryClass.simpleName}]."
@@ -201,16 +209,6 @@ class EndpointBeanConfiguration {
  * @param servletName configured for the endpoint artefacts.
  * @return spring dsl for the endpoint service beans.
  */
-    Closure cxfServiceEndpointBeans(final String servletName) {
-        return {
-            eachEndpointArtefact(servletName) {DefaultGrailsEndpointClass endpointArtefact ->
-                String endpointName = endpointArtefact.propertyName
-
-                "${endpointName}Bean"((endpointName + 'Factory'): 'create')
-                log.debug "Cxf endpoint bean wired for [${endpointArtefact.fullName}] on [${servletName}] servlet."
-            }
-        }
-    }
 
     private static final AUTOWIRED_SINGLETON = {bean ->
         bean.singleton = true

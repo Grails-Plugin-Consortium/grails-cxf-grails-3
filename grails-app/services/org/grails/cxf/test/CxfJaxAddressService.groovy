@@ -7,7 +7,7 @@ import org.grails.cxf.utils.EndpointType
 
 class CxfJaxAddressService {
 
-    static expose = EndpointType.JAX_WS
+//    static expose = EndpointType.JAX_WS
     static address = "/v1.4/#name"
 
     @WebResult(name='legacyResult')

@@ -8,7 +8,7 @@ import javax.jws.WebResult
 class BoatService {
 
     //jsx_ws requires @WebMethod for exposure of service methods
-    static expose = EndpointType.JAX_WS
+//    static expose = EndpointType.JAX_WS
 
     def truckService
 

@@ -4,7 +4,7 @@ import org.grails.cxf.utils.EndpointType
 
 class PageSimpleService {
 
-    static expose = ['cxf']
+//    static expose = ['cxf']
 
     String sayHello() {
         'hello'

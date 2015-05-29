@@ -7,7 +7,7 @@ import org.grails.cxf.utils.EndpointType
 
 class RemoteReportService {
 
-    static expose = EndpointType.JAX_WS
+//    static expose = EndpointType.JAX_WS
 
     @WebResult(name = 'remoteReport')
     @WebMethod(operationName = 'getMeSomeReports')

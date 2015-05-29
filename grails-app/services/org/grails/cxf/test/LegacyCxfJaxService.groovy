@@ -6,7 +6,7 @@ import javax.jws.WebResult
 
 class LegacyCxfJaxService {
 
-    static expose = ['cxfjax']
+//    static expose = ['cxfjax']
 
     @WebResult(name='legacyResult')
     @WebMethod(operationName='legacyMethod')
