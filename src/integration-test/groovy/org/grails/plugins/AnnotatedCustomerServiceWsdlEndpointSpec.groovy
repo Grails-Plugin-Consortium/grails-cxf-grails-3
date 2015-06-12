@@ -1,7 +1,6 @@
 package org.grails.plugins
 
 import geb.spock.GebSpec
-import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
 import org.grails.cxf.test.soap.CustomerType
@@ -14,7 +13,7 @@ import wslite.soap.SOAPVersion
 class AnnotatedCustomerServiceWsdlEndpointSpec extends GebSpec {
 
     void setup() {
-        browser.config.reportsDir = new File( 'target/geb_reports' )
+        browser.config.reportsDir = new File('target/geb_reports')
     }
 
     SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/annotatedCustomerServiceWsdl")

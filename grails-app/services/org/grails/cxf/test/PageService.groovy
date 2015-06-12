@@ -1,18 +1,21 @@
 package org.grails.cxf.test
 
-import org.grails.cxf.utils.EndpointType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
 import javax.jws.WebMethod
 import javax.jws.WebResult
 
-class PageService implements IPageService {
+@GrailsCxfEndpoint
+class PageService {
 
-    static expose = [EndpointType.JAX_WS]
-
+    @WebResult(name = 'hello')
+    @WebMethod(operationName = 'sayHello')
     String sayHello() {
         'hello'
     }
 
+    @WebResult(name = 'chapters')
+    @WebMethod(operationName = 'getSomeChapters')
     List<Chapter> getSomeChapters() {
         List<Chapter> chapters = []
         chapters << createChapter([name: "Chapter1"], false, false)
@@ -21,10 +24,14 @@ class PageService implements IPageService {
         chapters
     }
 
+    @WebResult(name = 'words')
+    @WebMethod(operationName = 'getSomeWords')
     List<Word> getSomeWords() {
         createWords()
     }
 
+    @WebResult(name = 'page')
+    @WebMethod(operationName = 'getMeSomePersistedPagesWithWords')
     List<Page> getMeSomePersistedPagesWithWords() {
         List<Page> pages = []
         pages << createPage([name: "saved page 1", number: 1], true).save(flush: true)
@@ -33,6 +40,8 @@ class PageService implements IPageService {
         pages
     }
 
+    @WebResult(name = 'page')
+    @WebMethod(operationName = 'getMeSomePagesWithWords')
     List<Page> getMeSomePagesWithWords() {
         List<Page> pages = []
         pages << createPage([name: "test1", number: 2], true)
@@ -41,6 +50,8 @@ class PageService implements IPageService {
         pages
     }
 
+    @WebResult(name = 'page')
+    @WebMethod(operationName = 'getMeSomePages')
     List<Page> getMeSomePages() {
         List<Page> pages = []
         pages << createPage([name: "Page 1, version should increment", number: 2], false)
@@ -52,9 +63,9 @@ class PageService implements IPageService {
     private createChapter(Map params, Boolean addPages = false, Boolean addWords = false) {
         Chapter chapter = Chapter.findOrCreateWhere(params)
         Integer pageNumber = 0
-        if(addPages && !chapter?.pages) {
+        if (addPages && !chapter?.pages) {
             def page = Page.findOrCreateWhere(name: "Page 1, no version", number: pageNumber++)
-            if(addWords) {
+            if (addWords) {
                 page.words = createWords(null)
             }
             chapter.addToPages(page)
@@ -64,7 +75,7 @@ class PageService implements IPageService {
 
     private createPage(Map params, Boolean addWords = false) {
         Page page = Page.findOrCreateWhere(params)
-        if(addWords && !page?.words) {
+        if (addWords && !page?.words) {
             createWords(page)
         }
         page
@@ -76,34 +87,8 @@ class PageService implements IPageService {
         words << new Word(text: "am")
         words << new Word(text: "the")
         words << new Word(text: "doctor")
-        if(page && !page.words)
+        if (page && !page.words)
             words.each { page.addToWords(it) }
         words
     }
-}
-
-interface IPageService {
-    @WebResult(name = 'hello')
-    @WebMethod(operationName = 'sayHello')
-    String sayHello()
-
-    @WebResult(name = 'chapters')
-    @WebMethod(operationName = 'getSomeChapters')
-    List<Chapter> getSomeChapters()
-
-    @WebResult(name = 'words')
-    @WebMethod(operationName = 'getSomeWords')
-    List<Word> getSomeWords()
-
-    @WebResult(name = 'page')
-    @WebMethod(operationName = 'getMeSomePersistedPagesWithWords')
-    List<Page> getMeSomePersistedPagesWithWords()
-
-    @WebResult(name = 'page')
-    @WebMethod(operationName = 'getMeSomePagesWithWords')
-    List<Page> getMeSomePagesWithWords()
-
-    @WebResult(name = 'page')
-    @WebMethod(operationName = 'getMeSomePages')
-    List<Page> getMeSomePages()
 }

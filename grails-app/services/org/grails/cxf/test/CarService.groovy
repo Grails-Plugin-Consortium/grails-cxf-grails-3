@@ -7,8 +7,10 @@ import javax.jws.WebResult
 import javax.jws.WebService
 
 @GrailsCxfEndpoint
-class CarService implements ICarService {
+class CarService {
 
+    @WebMethod
+    @WebResult(name = 'honk')
     String honkHorn() {
         'HONK'
     }
@@ -24,12 +26,4 @@ class CarService implements ICarService {
     String start() {
         'GAS'
     }
-}
-
-@WebService
-interface ICarService {
-
-    @WebMethod
-    @WebResult(name = 'honk')
-    String honkHorn()
 }

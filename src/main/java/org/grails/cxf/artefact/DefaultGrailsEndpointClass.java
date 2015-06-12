@@ -210,8 +210,6 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 		GrailsCxfEndpoint annotation = getClazz().getAnnotation(GrailsCxfEndpoint.class);
 		if (annotation != null) {
 			setupExposeViaAnnotation(annotation);
-		} else {
-			setupExposeViaProperty();
 		}
 
 		if (expose.equals(EndpointExposureType.SIMPLE)) {
@@ -221,18 +219,18 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 		log.debug("Endpoint [" + getFullName() + "] configured to use [" + expose.name() + "].");
 	}
 
-	private void setupExposeViaProperty() {
-		Object propExpose = getPropertyValue(PROP_EXPOSE);
-		String manualExpose = getConfiguredExpose(propExpose);
-
-		if (manualExpose != null && !manualExpose.equals("")) {
-			try {
-				expose = EndpointExposureType.forExpose(manualExpose);
-			} catch (IllegalArgumentException e) {
-				log.error("Unsupported endpoint exposure type [" + manualExpose + "] for endpoint [" + getFullName() + "].  Using default type.");
-			}
-		}
-	}
+//	private void setupExposeViaProperty() {
+//		Object propExpose = getPropertyValue(PROP_EXPOSE);
+//		String manualExpose = getConfiguredExpose(propExpose);
+//
+//		if (manualExpose != null && !manualExpose.equals("")) {
+//			try {
+//				expose = EndpointExposureType.forExpose(manualExpose);
+//			} catch (IllegalArgumentException e) {
+//				log.error("Unsupported endpoint exposure type [" + manualExpose + "] for endpoint [" + getFullName() + "].  Using default type.");
+//			}
+//		}
+//	}
 
 	private void setupExposeViaAnnotation(GrailsCxfEndpoint annotation) {
 		EndpointType exposes = annotation.expose();

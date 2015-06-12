@@ -1,10 +1,10 @@
 package org.grails.cxf
 
 import grails.plugins.Plugin
-import org.apache.cxf.bus.spring.SpringBus
+import org.apache.cxf.Bus;
+import org.apache.cxf.jaxws.EndpointImpl
 import org.grails.cxf.artefact.EndpointBeanConfiguration
-import org.grails.cxf.servlet.GrailsCxfServlet
-import org.springframework.boot.context.embedded.ServletRegistrationBean
+import org.grails.cxf.test.OrganizationService
 
 class GrailsCxfGrailsPlugin extends Plugin {
 
@@ -48,25 +48,9 @@ class GrailsCxfGrailsPlugin extends Plugin {
 
     Closure doWithSpring() {
         { ->
-            cxf(SpringBus)
-
-            cxfServlet(ServletRegistrationBean, new GrailsCxfServlet(), "/services/*") {
-                loadOnStartup = 10
-            }
-
-//            "carServiceFactory"(GrailsJaxWsServerFactoryBean) {
-//                address = '/car'
-//                serviceClass = CarService
-//                serviceBean = ref('carService')
-//                ignoredMethods = GrailsEndpointClass.DEFAULT_GROOVY_EXCLUDES
-//                bus = ref(cxf)
-//            }
-//
-//            "carServiceBean"(('carServiceFactory'): 'create')
-
             EndpointBeanConfiguration bc = new EndpointBeanConfiguration(grailsApplication)
 //
-//            with bc.cxfBeans()
+            with bc.cxfBeans()
             with bc.endpointBeans()
             with bc.factoryBeans()
         }

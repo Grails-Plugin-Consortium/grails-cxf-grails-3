@@ -8,22 +8,19 @@ import javax.jws.WebMethod
 import javax.jws.WebParam
 import javax.jws.WebService
 
-class AnnotatedCustomerServiceWsdlEndpoint implements IAnnotatedCustomerServiceWsdlEndpoint {
+
+//@WebService(name = 'CustomerServiceWsdlEndpoint',
+//        targetNamespace = 'http://test.cxf.grails.org/',
+//        serviceName = 'CustomerServiceWsdlEndpoint',
+//        portName = 'CustomerServiceWsdlPort')
+//@GrailsCxfEndpoint(wsdl = 'org/grails/cxf/test/soap/CustomerService.wsdl', expose = EndpointType.JAX_WS_WSDL)
+class AnnotatedCustomerServiceWsdlEndpoint {
 
     CustomerServiceEndpoint customerServiceEndpoint
 
-    List<Customer> getCustomersByName(final String name)
+//    @WebMethod
+    List<Customer> getCustomersByName2(@WebParam final String name)
     {
         customerServiceEndpoint.getCustomersByName(name)
     }
-}
-
-@WebService(name = 'CustomerServiceWsdlEndpoint',
-        targetNamespace = 'http://test.cxf.grails.org/',
-        serviceName = 'CustomerServiceWsdlEndpoint',
-        portName = 'CustomerServiceWsdlPort')
-@GrailsCxfEndpoint(wsdl = 'org/grails/cxf/test/soap/CustomerService.wsdl', expose = EndpointType.JAX_WS_WSDL)
-interface IAnnotatedCustomerServiceWsdlEndpoint {
-    @WebMethod
-    List<Customer> getCustomersByName(@WebParam final String name)
 }

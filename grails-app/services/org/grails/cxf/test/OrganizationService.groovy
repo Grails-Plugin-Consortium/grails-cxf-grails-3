@@ -1,39 +1,30 @@
 package org.grails.cxf.test
 
+import org.grails.cxf.utils.GrailsCxfEndpoint
 import org.springframework.beans.factory.annotation.Autowired
 
 import javax.jws.WebMethod
 import javax.jws.WebParam
-import javax.jws.WebResult
 import javax.jws.WebService
 import javax.jws.soap.SOAPBinding
 
-
-class OrganizationService implements IOrganizationService {
+//@WebService(portName = "OrganizationPort", serviceName = "OrganizationService", name = "OrganizationService")
+@GrailsCxfEndpoint(name = 'OrganizationService')
+@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED, use = SOAPBinding.Use.LITERAL, style = SOAPBinding.Style.DOCUMENT)
+class OrganizationService {
 
     @Autowired
     private BoatService boatService
     @Autowired
     private CarService carService
 
-    String goFish(String kurumKodu) {
+    @WebMethod
+    String goFish(@WebParam(partName = "KurumSorgulamaTalep", name = "KurumSorgulamaTalep", targetNamespace = "http://akum.compugroup.com") String kurumKodu) {
         boatService.fish()
     }
 
-    String goHonk(String kurumKodu) {
+    @WebMethod
+    String goHonk(@WebParam(partName = "KurumSorgulamaTalep", name = "KurumSorgulamaTalep", targetNamespace = "http://akum.compugroup.com") String kurumKodu) {
         carService.honkHorn()
     }
-}
-
-@WebService(portName = "OrganizationPort", serviceName = "OrganizationService", name = "OrganizationService", targetNamespace = "http://akum.compugroup.com")
-@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED, use = SOAPBinding.Use.LITERAL, style = SOAPBinding.Style.DOCUMENT)
-interface IOrganizationService {
-
-    @WebMethod
-    @WebResult
-    String goFish(@WebParam(partName = "KurumSorgulamaTalep", name = "KurumSorgulamaTalep", targetNamespace = "http://akum.compugroup.com") String kurumKodu)
-
-    @WebMethod
-    @WebResult
-    String goHonk(@WebParam(partName = "KurumSorgulamaTalep", name = "KurumSorgulamaTalep", targetNamespace = "http://akum.compugroup.com") String kurumKodu)
 }

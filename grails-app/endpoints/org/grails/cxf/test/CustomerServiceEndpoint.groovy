@@ -4,13 +4,15 @@ import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl
 import org.grails.cxf.test.soap.Customer
 import org.grails.cxf.test.soap.CustomerService
 import org.grails.cxf.test.soap.CustomerType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
 import javax.xml.datatype.DatatypeConstants
 import org.grails.cxf.utils.EndpointType
 
-class CustomerServiceEndpoint implements CustomerService {
+import javax.xml.ws.RequestWrapper
+import javax.xml.ws.ResponseWrapper
 
-    static expose = EndpointType.SIMPLE
+class CustomerServiceEndpoint {
 
     static List<Customer> CUSTOMERS = [
             new Customer(name: 'Frank', address: ['1234 Awesomeness St.', 'Chochokacho, Toast'], numOrders: 5,
