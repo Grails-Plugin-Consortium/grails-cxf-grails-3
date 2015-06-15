@@ -8,11 +8,9 @@ import wslite.soap.SOAPClient
 import wslite.soap.SOAPResponse
 import wslite.soap.SOAPVersion
 
-@Integration
-@Rollback
 class CustomerServiceWsdlEndpointSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/customerServiceWsdl")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/customerServiceWsdl")
 
     def "getCustomersByName actually works"() {
         when:

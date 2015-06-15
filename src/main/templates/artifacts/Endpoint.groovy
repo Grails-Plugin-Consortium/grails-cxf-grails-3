@@ -1,11 +1,13 @@
 @artifact.package@
 
-import org.grails.cxf.utils.EndpointType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
+import javax.jws.WebMethod
+
+@GrailsCxfEndpoint
 class @artifact.name@ {
-    static expose = EndpointType.JAX_WS
-    static excludes = []
 
+    @WebMethod
     String serviceMethod(String s) {
         return s
     }

@@ -11,7 +11,7 @@ import wslite.soap.SOAPVersion
 @Rollback
 class PlaneServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/plane")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/plane")
 
     def "invoke a boolean method on the plane service using soap 1.2"() {
         when:

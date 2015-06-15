@@ -1,13 +1,15 @@
 package org.grails.cxf.test
 
-import org.grails.cxf.utils.EndpointType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
+import javax.jws.WebMethod
+import javax.jws.WebParam
+
+@GrailsCxfEndpoint(soap12 = true)
 class SimpleOneTwoEndpoint {
 
-    static expose = [EndpointType.SIMPLE]
-    static soap12 = true
-
-    String simpleMethod(String param) {
+    @WebMethod
+    String simpleMethod(@WebParam(name='param') String param) {
         return param.toString()
     }
 }

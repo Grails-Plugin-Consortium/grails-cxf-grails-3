@@ -12,7 +12,7 @@ import wslite.soap.SOAPVersion
 
 class CoffeeMakerEndpointSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/coffeeMaker")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/coffeeMaker")
 
     def "get coffee locations map"() {
         when:
@@ -22,7 +22,7 @@ class CoffeeMakerEndpointSpec extends GebSpec {
                 'test:mapCoffeeLocations' {}
             }
         }
-        def returnNode = response.mapCoffeeLocationsResponse.return.entry
+        def returnNode = response.mapCoffeeLocationsResponse.entires.entry
 
         then:
         200 == response.httpResponse.statusCode

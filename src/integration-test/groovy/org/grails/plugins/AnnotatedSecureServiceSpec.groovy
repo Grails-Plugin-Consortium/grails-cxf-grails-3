@@ -11,9 +11,10 @@ import wslite.soap.SOAPVersion
 
 @Integration
 @Rollback
+@Ignore
 class AnnotatedSecureServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/annotatedSecure")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/annotatedSecure")
 
     def "invoke a method on wss4j secured service without creds"() {
         when:

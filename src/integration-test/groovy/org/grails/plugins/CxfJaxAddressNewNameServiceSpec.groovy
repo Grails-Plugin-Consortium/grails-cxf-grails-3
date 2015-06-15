@@ -9,11 +9,10 @@ import wslite.soap.SOAPFaultException
 import wslite.soap.SOAPResponse
 import wslite.soap.SOAPVersion
 
-@Integration
-@Rollback
+
 class CxfJaxAddressNewNameServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/override/v1/ninjas")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/override/v1/ninjas")
 
     @Unroll
     def "invoke the exposed method on the legacy cxf jax service param=#legacyParam"() {

@@ -1,14 +1,14 @@
 package org.grails.cxf.test
 
+import org.grails.cxf.utils.GrailsCxfEndpoint
+
 import javax.jws.WebMethod
 import javax.jws.WebParam
 import javax.jws.WebResult
 import org.grails.cxf.utils.EndpointType
 
+@GrailsCxfEndpoint(address = "/v1.4/#name")
 class CxfJaxAddressService {
-
-//    static expose = EndpointType.JAX_WS
-    static address = "/v1.4/#name"
 
     @WebResult(name='legacyResult')
     @WebMethod(operationName='legacyMethod')

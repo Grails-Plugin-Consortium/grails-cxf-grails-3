@@ -6,12 +6,14 @@ import javax.jws.WebMethod
 import javax.jws.WebService
 
 @GrailsCxfEndpoint(soap12 = true)
-class PlaneService implements IPlaneService {
+class PlaneService {
 
+    @WebMethod
     Boolean canFly() {
         true
     }
 
+    @WebMethod
     Boolean canFloat() {
         false
     }
@@ -19,13 +21,4 @@ class PlaneService implements IPlaneService {
     String ignoreMe(Boolean bool) {
         bool.toString()
     }
-}
-
-@WebService
-interface IPlaneService {
-    @WebMethod
-    Boolean canFly()
-
-    @WebMethod
-    Boolean canFloat()
 }

@@ -8,10 +8,9 @@ import wslite.soap.SOAPResponse
 import wslite.soap.SOAPVersion
 
 @Integration
-@Rollback
 class AnnotatedLongAddressServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/i/love/turtles/v1/zombie")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/i/love/turtles/v1/zombie")
 
     def "invoke a method on the annotated service with long address and overridden name"() {
         when:

@@ -1,6 +1,7 @@
 package org.grails.plugins
 
 import geb.spock.GebSpec
+import grails.cxf.Application
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
 import wslite.soap.SOAPClient
@@ -8,10 +9,9 @@ import wslite.soap.SOAPResponse
 import wslite.soap.SOAPVersion
 
 @Integration
-@Rollback
 class AnnotatedDefaultEndpointSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/annotatedDefault")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/annotatedDefault")
 
     def "invoke a method on the annotated service using annotation defaults"() {
         when:

@@ -10,7 +10,7 @@ import wslite.soap.SOAPResponse
 @Rollback
 class PageServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/page")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/page")
 
     def "invoke a method where domain objects are persisted with hasMany"() {
         when:

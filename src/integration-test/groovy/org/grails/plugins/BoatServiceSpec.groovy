@@ -12,7 +12,7 @@ import wslite.soap.SOAPVersion
 @Rollback
 class BoatServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/boat")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/boat")
 
     def "invoke the exposed method on the boat service"() {
         when:

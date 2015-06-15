@@ -8,16 +8,12 @@ import javax.jws.WebMethod
 import javax.jws.WebParam
 import javax.jws.WebResult
 
-@GrailsCxfEndpoint(expose = EndpointType.JAX_WS,properties = [@GrailsCxfEndpointProperty(name = "ws-security.enable.nonce.cache", value = "false"), @GrailsCxfEndpointProperty(name = "ws-security.enable.timestamp.cache", value = "false")])
-class AnnotatedSecureService implements IAnnotatedSecureService {
+@GrailsCxfEndpoint(expose = EndpointType.JAX_WS, properties = [@GrailsCxfEndpointProperty(name = "ws-security.enable.nonce.cache", value = "false"), @GrailsCxfEndpointProperty(name = "ws-security.enable.timestamp.cache", value = "false")])
+class AnnotatedSecureService {
 
-    String simpleMethod(String param) {
-        return param.toString()
-    }
-}
-
-interface IAnnotatedSecureService {
     @WebMethod(operationName = "simpleMethod")
     @WebResult(name = "simpleResult")
-    String simpleMethod(@WebParam(name = "param") String param)
+    String simpleMethod(@WebParam(name = "param") String param) {
+        return param.toString()
+    }
 }

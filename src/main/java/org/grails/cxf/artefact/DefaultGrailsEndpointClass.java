@@ -213,7 +213,7 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 		}
 
 		if (expose.equals(EndpointExposureType.SIMPLE)) {
-			log.warn("Simple Cxf Frontends are generally not recommended. Find out more: http://cxf.apache.org/docs/simple-frontend.html");
+			log.warn("Simple Cxf Frontends are not currently supprted, but can still be manually annotated and wired. Find out more: http://cxf.apache.org/docs/simple-frontend.html");
 		}
 
 		log.debug("Endpoint [" + getFullName() + "] configured to use [" + expose.name() + "].");
@@ -241,6 +241,8 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 		}
 	}
 
+	//No longer supports def expose
+	@Deprecated()
 	private String getConfiguredExpose(Object propExpose) {
 		String manualExpose = null;
 
@@ -260,6 +262,7 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 	 * @param propExpose list of values to check
 	 * @return string of the service type to wire
 	 */
+	@Deprecated()
 	private String getListExpose(List propExpose) {
 		String manualExpose = null;
 		for (Object prop : ((List) propExpose)) {
@@ -353,7 +356,7 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 		if (annotation != null && !annotation.wsdl().equals("")) {
 			wsdlLocation = annotation.wsdl();
 		} else {
-			wsdlLocation = (String) getPropertyOrStaticPropertyOrFieldValue(PROP_WSDL, String.class);
+			wsdlLocation = getPropertyOrStaticPropertyOrFieldValue(PROP_WSDL, String.class);
 		}
 
 		if (wsdlLocation != null && !wsdlLocation.equals("")) {
@@ -382,7 +385,7 @@ public class DefaultGrailsEndpointClass extends AbstractInjectableGrailsClass im
 	}
 
 	private void setupSoap12BindingViaProperty() {
-		Boolean soap12setting = (Boolean) getPropertyOrStaticPropertyOrFieldValue(PROP_SOAP12, Boolean.class);
+		Boolean soap12setting = getPropertyOrStaticPropertyOrFieldValue(PROP_SOAP12, Boolean.class);
 		if (soap12setting != null) {
 			soap12 = soap12setting;
 		}

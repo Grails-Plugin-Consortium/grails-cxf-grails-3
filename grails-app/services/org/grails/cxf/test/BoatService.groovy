@@ -1,10 +1,11 @@
 package org.grails.cxf.test
 
-import org.grails.cxf.utils.EndpointType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
 import javax.jws.WebMethod
 import javax.jws.WebResult
 
+@GrailsCxfEndpoint
 class BoatService {
 
     //jsx_ws requires @WebMethod for exposure of service methods

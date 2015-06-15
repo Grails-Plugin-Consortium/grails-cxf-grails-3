@@ -183,7 +183,7 @@ class EndpointBeanConfiguration {
                 }
 
                 "${endpointName}Bean"(("${endpointName}Factory"): 'create')
-                log.debug "Cxf endpoint bean wired for [${endpointName}] on [${endpointName}] servlet."
+                log.debug "Cxf service bean wired for [${endpointName}] on [${endpointName}Bean] servlet."
 
                 log.debug "Cxf endpoint server factory wired for [${endpointArtefact.fullName}] of type [${endpointFactoryClass.simpleName}]."
                 log.trace 'Cxf endpoint server factory bean wiring details:' +

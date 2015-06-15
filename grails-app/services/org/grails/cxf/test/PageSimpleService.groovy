@@ -1,7 +1,9 @@
 package org.grails.cxf.test
 
 import org.grails.cxf.utils.EndpointType
+import org.grails.cxf.utils.GrailsCxfEndpoint
 
+@GrailsCxfEndpoint
 class PageSimpleService {
 
 //    static expose = ['cxf']

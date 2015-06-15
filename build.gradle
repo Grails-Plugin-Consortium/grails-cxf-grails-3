@@ -19,15 +19,13 @@ plugins {
 version "3.0.0-SNAPSHOT"
 group "org.grails.plugins"
 
-apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: "spring-boot"
 apply plugin: "org.grails.grails-plugin"
 apply plugin: "org.grails.grails-gsp"
 // Used for publishing to central repository, remove if not needed
-apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
-apply from:'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
+apply from: 'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
 
 ext {
     grailsVersion = project.grailsVersion
@@ -101,12 +99,40 @@ dependencies {
 
     testCompile('org.seleniumhq.selenium:selenium-firefox-driver:2.44.0')
     testCompile('org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0')
-    testCompile "org.grails.plugins:geb:1.0.0.BUILD-SNAPSHOT"
 
     testCompile "org.grails:grails-plugin-testing"
+    testCompile "org.grails.plugins:geb:1.0.0.BUILD-SNAPSHOT"
 
     console "org.grails:grails-console"
 }
+
+jar {
+    exclude "application.groovy"
+    exclude "src/test/**"
+    exclude "src/main/groovy/org/grails/cxf/test/**"
+    exclude "src/main/java/org/grails/cxf/test/**"
+    exclude "src/integration-test/**"
+}
+
+bintray {
+    user = System.getenv("BINTRAY_USER") ?: project.hasProperty("bintrayUser") ? project.bintrayUser : ''
+    key = System.getenv("BINTRAY_KEY") ?: project.hasProperty("bintrayKey") ? project.bintrayKey : ''
+    publications = ['maven']
+    pkg {
+        repo = 'grails-plugins'
+        userOrg = 'ctoestreich'
+        name = "org.grails.plugins:grails-cxf-grails-3"
+        desc = "Grails CXF plugin"
+        websiteUrl = "http://grails.org/plugin/cxf"
+        issueTrackerUrl = "https://github.com/Grails-Plugin-Consortium/grails-cxf-grails-3/issues"
+        vcsUrl = "https://github.com/Grails-Plugin-Consortium/grails-cxf-grails-3"
+        licenses = ['Apache-2.0']
+        publicDownloadNumbers = true
+    }
+}
+
+
+bintrayUpload.dependsOn build, sourcesJar, javadocJar
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion

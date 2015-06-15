@@ -13,7 +13,7 @@ import wslite.soap.SOAPFaultException
 @Rollback
 class AnnotatedExcludesCarServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/annotatedExcludesCar")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/annotatedExcludesCar")
 
     def "honk the horn"() {
         when:
@@ -23,7 +23,7 @@ class AnnotatedExcludesCarServiceSpec extends GebSpec {
                 'test:honkHorn' {}
             }
         }
-        def methodResponse = response.body.honkHornResponse
+        def methodResponse = response?.body?.honkHornResponse
 
         then:
         200 == response.httpResponse.statusCode

@@ -6,12 +6,15 @@ import org.grails.cxf.test.soap.CustomerService
 import org.grails.cxf.test.soap.CustomerType
 import org.grails.cxf.utils.GrailsCxfEndpoint
 
+import javax.jws.WebMethod
+import javax.jws.WebParam
 import javax.xml.datatype.DatatypeConstants
 import org.grails.cxf.utils.EndpointType
 
 import javax.xml.ws.RequestWrapper
 import javax.xml.ws.ResponseWrapper
 
+@GrailsCxfEndpoint
 class CustomerServiceEndpoint {
 
     static List<Customer> CUSTOMERS = [
@@ -24,7 +27,8 @@ class CustomerServiceEndpoint {
 
     ]
 
-    List<Customer> getCustomersByName(final String name) {
+    @WebMethod
+    List<Customer> getCustomersByName(@WebParam final String name) {
         CUSTOMERS.findAll { it.name == name }
     }
 

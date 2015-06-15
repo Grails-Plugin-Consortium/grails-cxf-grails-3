@@ -12,7 +12,7 @@ import wslite.soap.SOAPVersion
 @Rollback
 class BookStoreEndpointSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/bookStore")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/bookStore")
 
     def "findBookByIsbn should return the book of awesomeness given a valid isbn"() {
         when:

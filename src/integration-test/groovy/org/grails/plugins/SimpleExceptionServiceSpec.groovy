@@ -11,7 +11,7 @@ import wslite.soap.SOAPVersion
 @Rollback
 class SimpleExceptionServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/simpleException")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/simpleException")
 
     def "invoke the pass method"() {
         when:

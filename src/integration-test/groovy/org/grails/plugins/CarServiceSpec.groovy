@@ -13,7 +13,7 @@ import wslite.soap.SOAPFaultException
 @Rollback
 class CarServiceSpec extends GebSpec {
 
-    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/grails-cxf/services/car")
+    SOAPClient client = new SOAPClient("http://localhost:${System.getProperty("server.port", "8080")}/services/car")
 
     def "honk the horn"() {
         when:

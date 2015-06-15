@@ -19,10 +19,14 @@ class CarService {
         'BEEP'
     }
 
+    @WebMethod
+    @WebResult(name = 'stop')
     String stop() {
         'BRAKES'
     }
 
+    @WebMethod
+    @WebResult(name = 'start')
     String start() {
         'GAS'
     }
