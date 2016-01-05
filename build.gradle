@@ -132,7 +132,7 @@ bintray {
 }
 
 
-bintrayUpload.dependsOn build, sourcesJar, javadocJar
+bintrayUpload.dependsOn sourcesJar, javadocJar
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
